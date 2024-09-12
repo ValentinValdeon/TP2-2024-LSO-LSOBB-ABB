@@ -1,0 +1,6 @@
+#ifndef LSOBB_H_INCLUDED
+#define LSOBB_H_INCLUDED
+
+
+
+#endif // LSOBB_H_INCLUDED
