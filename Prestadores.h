@@ -10,7 +10,7 @@ typedef struct {
 }Prestador;
 
 
-void Mostrarprestador(Prestador prestador) {
+void MostrarPrestador(Prestador prestador) {
     printf("DNI: %ld\n", prestador.dni);
     printf("Nombre y Apellido: %s\n", prestador.nombre_y_apellido);
     printf("Servicios: %s\n", prestador.servicios);

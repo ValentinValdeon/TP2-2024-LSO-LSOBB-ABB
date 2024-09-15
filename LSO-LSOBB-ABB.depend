@@ -3,14 +3,24 @@
 	<stdio.h>
 	<stdlib.h>
 
-1726200470 source:j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\main.c
+1726362394 source:j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\main.c
 	<stdio.h>
 	<stdlib.h>
 	<malloc.h>
 	<math.h>
 	<ctype.h>
 	"Prestadores.h"
+	"LSO.h"
+	"LSOBB.h"
+	"ABB.h"
 	<string.h>
 
-1726182951 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\prestadores.h
+1726361327 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\prestadores.h
+
+1726361898 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\lso.h
+
+1726362209 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\lsobb.h
+	<math.h>
+
+1726362282 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\abb.h
 

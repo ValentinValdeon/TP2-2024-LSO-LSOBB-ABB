@@ -142,7 +142,7 @@ int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
             if(arbol->cursor == arbol->raiz){
                 arbol->raiz = arbol->cursor->hijoIzq;
                 free((void*)arbol->cursor);
-            } else if(arbol->cursor->p.codigo > arbol->padre->p.codigo){
+            } else if(arbol->cursor->p.dni > arbol->padre->p.dni){
                 arbol->padre->hijoDer = arbol->cursor->hijoIzq;
                 free((void*)arbol->cursor);
             }
@@ -187,12 +187,12 @@ int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
 int evocacionABB(ArbolABB* arbol,long dni_x, Prestador *p, float* costos){
     float costosAux=0.0;
     if(localizacionABB(arbol, dni_x, &costosAux) == 1){
-        p.dni = arbol->cursor->p.dni
-        strcpy(arbol->cursor->p.nombre_y_apellido, p.nombre_y_apellido);
-        strcpy(arbol->cursor->p.mail, p.mail);
-        strcpy(arbol->cursor->p.domicilio, p.domicilio);
-        strcpy(arbol->cursor->p.servicios, p.servicios);
-        strcpy(arbol->cursor->p.telefono, p.telefono);
+        p->dni = arbol->cursor->p.dni;
+        strcpy(arbol->cursor->p.nombre_y_apellido, p->nombre_y_apellido);
+        strcpy(arbol->cursor->p.mail, p->mail);
+        strcpy(arbol->cursor->p.domicilio, p->domicilio);
+        strcpy(arbol->cursor->p.servicios, p->servicios);
+        strcpy(arbol->cursor->p.telefono, p->telefono);
         (*costos) = costosAux;
         return 1;
     } else {
