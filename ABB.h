@@ -32,11 +32,17 @@ void liberarABB(Nodo* nodo) {
 }
 
 int localizacionABB(ArbolABB* arbol, long dni_x, float *costosL){
+
+
+
     float costosAux = 0.0;
     (*arbol).cursor = arbol->raiz;
     (*arbol).padre = arbol->raiz;
 
-    while((arbol->cursor != NULL) && (strcmp(arbol->cursor->p.dni, dni_x) != 0)) {
+
+
+
+    while((arbol->cursor != NULL) && (  arbol->cursor->p.dni != dni_x)) {
 
         if(arbol->cursor->p.dni > dni_x ){
             (*arbol).padre = arbol->cursor;
@@ -49,11 +55,16 @@ int localizacionABB(ArbolABB* arbol, long dni_x, float *costosL){
 
     }
 
+
+
+
+
     if(arbol->cursor != NULL){
         costosAux += 1 ;
         (*costosL) = costosAux;
         return 1;
     } else {
+
         (*costosL) = costosAux;
         return 0;
     }
@@ -61,6 +72,8 @@ int localizacionABB(ArbolABB* arbol, long dni_x, float *costosL){
 }
 
 int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
+
+
     if(arbol->cant==110){ //arbol lleno
         return 0;
     }
@@ -69,14 +82,21 @@ int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
     if (auxiliar == NULL){
         return 2; //Memoria insuficiente
     }else {
+
+
         if(localizacionABB(arbol, p.dni, &costos) == 0){
+
             auxiliar->p = p;
             auxiliar->hijoDer = NULL;
             auxiliar->hijoIzq = NULL;
             if(arbol->raiz == NULL){
+
                 arbol->raiz = auxiliar;
+
+
                 costosAux +=0.5;
                 (*costosA) = costosAux;
+
                 return 1;
             }
             else if(arbol->padre->p.dni > auxiliar->p.dni ){
@@ -97,7 +117,9 @@ int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
 }
 
 int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
-    int resp;
+
+
+    int resp = 0;
     float costosAux =0.0, costos = 0.0;
     if(localizacionABB(arbol, p.dni, &costos) == 1){
             if(compararPrestador(p,arbol->cursor->p))
@@ -114,7 +136,7 @@ int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
                 free((void*)arbol->raiz);
                 arbol->raiz = NULL;
 
-            }else if(strcmpi(arbol->cursor->p.dni, arbol->padre->p.dni)>0){
+            }else if(arbol->cursor->p.dni > arbol->padre->p.dni){
                 arbol->padre->hijoDer = NULL ;
                 free((void*)arbol->cursor);
                 }
@@ -184,7 +206,7 @@ int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
         }  //no lo encontro
     }
 
-int evocacionABB(ArbolABB* arbol,long dni_x, Prestador *p, float* costos){
+int evocacionABB(int cant,ArbolABB* arbol,long dni_x, Prestador *p, float* costos){
     float costosAux=0.0;
     if(localizacionABB(arbol, dni_x, &costosAux) == 1){
         p->dni = arbol->cursor->p.dni;
@@ -198,6 +220,39 @@ int evocacionABB(ArbolABB* arbol,long dni_x, Prestador *p, float* costos){
     } else {
         (*costos)=costosAux;
         return 0;
+    }
+}
+
+
+void preOrden(Nodo *a){
+
+if( a == NULL){
+
+    }else{
+
+        MostrarPrestador(a->p);
+
+        if( a->hijoIzq != NULL ){
+            printf("\n---------------------------------------------------------------");
+            printf("\nEl DNI de su hijo izquierdo es: %d",a->hijoIzq->p.dni);
+        }else{
+            printf("\n---------------------------------------------------------------");
+            printf("\nNo tiene hijo izquierdo.");
+        }
+
+        if(a->hijoDer!= NULL){
+            printf("\n---------------------------------------------------------------");
+            printf("\nEl DNI de su hijo derecho es: %d",a->hijoDer->p.dni);
+        }else{
+            printf("\n---------------------------------------------------------------");
+            printf("\nNo tiene hijo derecho.");
+        }
+        printf("\n---------------------------------------------------------------");
+        getchar();
+        preOrden(a->hijoIzq);
+        preOrden(a->hijoDer);
+
+
     }
 }
 

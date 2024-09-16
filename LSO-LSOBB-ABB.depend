@@ -24,3 +24,24 @@
 
 1726362282 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\abb.h
 
+1726444773 source:c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\main.c
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	<math.h>
+	<ctype.h>
+	"Prestadores.h"
+	"LSO.h"
+	"LSOBB.h"
+	"ABB.h"
+	<string.h>
+
+1726433876 c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\prestadores.h
+
+1726433876 c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\lso.h
+
+1726436728 c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\lsobb.h
+	<math.h>
+
+1726444261 c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\abb.h
+

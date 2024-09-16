@@ -74,6 +74,7 @@ int altaLSOBT(Prestador p, Prestador P[], int *cant, int *cor)
     {
         return 0;
     }
+    return 0;
 }
 
 int bajaLSOBT(Prestador p, Prestador P[],int *cant, int *cor)

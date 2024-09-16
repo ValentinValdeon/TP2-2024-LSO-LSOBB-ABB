@@ -15,7 +15,7 @@ void gotoxy(int x, int y)
 }
 
 
-int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *cantLSOBT)
+int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], ArbolABB *ABB , int *cantLSOBT, int *cantABB)
 {
 
     FILE* fp = fopen("Operaciones-Prestadores.txt", "r");
@@ -26,7 +26,7 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *ca
 
     (*cantLSO)=0;
     (*cantLSOBT)=0;
-
+    (*cantABB)=0;
     // Alta - Baja - Evocacion - SumaAlta - SumaBaja - SumaEvo - Maximo
 
 
@@ -36,10 +36,13 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *ca
     int altaLSBT=0, bajaLSBT=0, evoLSBT=0, maxAltaLSBT=0, maxBajaLSBT=0, maxEvoLSBTF=0, maxEvoLSBTE=0;
     float sumaAltaLSBT=0, sumaBajaLSBT=0, sumaEvoLSBTF=0, sumaEvoLSBTE=0;
 
-    int cantAltaLSO=0,cantAltaLSOBT=0;
-    int cantBajaLSO=0,cantBajaLSOBT=0;
-    int cantEvoELSO=0,cantEvoELSOBT=0;
-    int cantEvoFLSO=0,cantEvoFLSOBT=0;
+      float altaAB=0.0, bajaAB=0.0, evoABB=0.0, maxAltaABB=0.0, maxBajaABB=0.0, maxEvoABBF=0.0, maxEvoABBE=0.0;
+    float sumaAltaABB=0, sumaBajaABB=0, sumaEvoABBF=0, sumaEvoABBE=0;
+
+    int cantAltaLSO=0,cantAltaLSOBT=0,cantAltaABB=0;
+    int cantBajaLSO=0,cantBajaLSOBT=0,cantBajaABB=0;
+    int cantEvoELSO=0,cantEvoELSOBT=0,cantEvoEABB=0;
+    int cantEvoFLSO=0,cantEvoFLSOBT=0,cantEvoFABB=0;
 
     if(fp==NULL)
     {
@@ -107,9 +110,25 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *ca
 
                         cantAltaLSOBT++;
                     }
+
+
+                     //ALTA ABB
+                    if(altaABB(ABB, p, &altaAB)==1)
+                    {
+                        // Suma para sacar la media
+                        sumaAltaABB = sumaAltaABB + altaAB;
+
+                        // Calcular el maximo costo
+                        if(altaAB>maxAltaABB) maxAltaABB = altaAB;
+
+                        cantAltaABB++;
+                    }
+
                     //Incializar nuevamente
+
                     altaLS = 0;
                     altaLSBT = 0;
+                    altaAB = 0;
 
                 }
                 else
@@ -136,9 +155,23 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *ca
 
                         cantBajaLSOBT++;
                     }
+
+
+                        //BAJA ABB
+                    if(bajaABB(ABB, p, &bajaAB)==1)
+                    {
+                        // Suma para sacar la media
+                        sumaBajaABB = sumaBajaABB + bajaAB;
+
+                        // Calcular el maximo costo
+                        if(bajaAB>maxBajaABB) maxBajaABB = bajaAB;
+
+                        cantBajaABB++;
+                    }
                     //Incializar nuevamente
                     bajaLS = 0;
                     bajaLSBT = 0;
+                    bajaAB = 0;
                 }
 
             }
@@ -192,9 +225,36 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *ca
 
                         cantEvoFLSOBT++;
                     }
+
+                      //EVOCACIONES ABB
+                    if(evocacionABB(*cantABB,ABB,  dniX, &p, &evoABB)==1)
+
+
+                    {
+                        // Suma para sacar la media
+                        sumaEvoABBE = sumaEvoABBE + evoABB;
+
+                        // Calcular el maximo costo
+                        if(evoABB>maxEvoABBE) maxEvoABBE = evoABB;
+
+                        cantEvoEABB++;
+                    }
+                    else
+                    {
+
+                        // Suma para sacar la media
+                        sumaEvoABBF = sumaEvoABBF + evoABB;
+
+                        // Calcular el maximo costo
+                        if(evoABB>maxEvoABBF) maxEvoABBF = evoLS;
+
+                        cantEvoFABB++;
+                    }
+
                     //Inicializar nuevamente
                     evoLS=0;
                     evoLSBT = 0;
+                    evoABB = 0;
                 }
             }
         }
@@ -273,17 +333,38 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], int *ca
         if(cantBajaLSOBT!=0) printf("Baja= %.2f", sumaBajaLSBT/cantBajaLSOBT);
         else printf("Baja= 0");
 
+
+
+
+
+
+
         gotoxy(0,9);
+         printf("// Arbol binario de busqueda");
         gotoxy(0,10);
+        printf("// Costos maximos ->");
         gotoxy(25,10);
+        printf("Evocacion Exitosa= %0.2f", maxEvoABBE);
         gotoxy(55,10);
+         printf("Evocacion Fracaso= %0.2f", maxEvoABBF);
         gotoxy(85,10);
+          printf("Alta= %0.2f", maxAltaABB);
         gotoxy(100,10);
+          printf("Baja= %0.2f", maxBajaABB);
         gotoxy(0,11);
+         printf("// Costos Medios  ->");
         gotoxy(25,11);
+         if(cantEvoEABB!=0) printf("Evocacion Exitosa= %.2f", sumaEvoABBE/cantEvoEABB);
+        else printf("Evocacion Exitosa= 0");
         gotoxy(55,11);
+        if(cantEvoFABB!=0) printf("Evocacion Fracaso= %.2f", sumaEvoABBF/cantEvoFABB);
+        else printf("Evocacion Fracaso= 0");
         gotoxy(85,11);
+if(cantAltaABB!=0) printf("Alta= %.2f", sumaAltaABB/cantAltaABB);
+        else printf("Alta= 0");
         gotoxy(100,11);
+if(cantBajaABB!=0) printf("Baja= %.2f", sumaBajaABB/cantBajaABB);
+        else printf("Baja= 0");
         gotoxy(0,13);
     }
 
@@ -294,8 +375,9 @@ int main()
 {
     Prestador LSO[MAX_prestadoresLSO];
     Prestador LSOBT[MAX_prestadoresLSBB];
+    ArbolABB ABB;
     int i;
-    int opcion, cantLSO = 0, cantLSOBT = 0;
+    int opcion, cantLSO = 0, cantLSOBT = 0 , cantABB=0;
 
     do
     {
@@ -313,7 +395,8 @@ int main()
         switch (opcion)
         {
         case 1:
-            compararEstructuras(LSO,&cantLSO,LSOBT,&cantLSOBT);
+            initializeABB(&ABB);
+            compararEstructuras(LSO,&cantLSO,LSOBT,&ABB,&cantLSOBT,&cantABB);
             system("pause");
             system("cls");
             break;
@@ -352,6 +435,17 @@ int main()
             system("cls");
             break;
         case 4:
+
+
+        if(ABB.raiz==NULL){
+        printf("Arbol vacio\n");
+        system("pause");
+           } else{
+               preOrden(ABB.raiz);
+
+                 printf("Total de %d prestadores\n", ABB.cant);
+               system("pause");}
+
             break;
         }
     }
