@@ -1,10 +1,9 @@
 #ifndef LSOBB_H_INCLUDED
 #define LSOBB_H_INCLUDED
-
-///TRISECCION, LIM IZQ IN, LIM DER EXC, SEG IZQ
 #include <math.h>
 #define MAX_prestadoresLSBB 110
 
+///TRISECCION, LIM IZQ IN, LIM DER EXC, SEG IZQ
 int localizarLSOBT(long dniX, Prestador P[], int *pos, int cant, int *celdasConsul)
 {
     (*pos)=0;

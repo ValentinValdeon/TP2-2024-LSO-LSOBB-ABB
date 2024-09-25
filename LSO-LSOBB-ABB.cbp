@@ -40,6 +40,9 @@
 		<Unit filename="LSOBB.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="Pila.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Prestadores.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

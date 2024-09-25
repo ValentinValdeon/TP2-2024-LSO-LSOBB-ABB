@@ -1,6 +1,6 @@
 #ifndef ABB_H_INCLUDED
 #define ABB_H_INCLUDED
-
+#include "Pila.h"
 
 typedef struct nodo{
     Prestador p;
@@ -234,7 +234,7 @@ if( a == NULL){
 
         if( a->hijoIzq != NULL ){
             printf("\n---------------------------------------------------------------");
-            printf("\nEl DNI de su hijo izquierdo es: %d",a->hijoIzq->p.dni);
+            printf("\nEl DNI de su hijo izquierdo es: %ld",a->hijoIzq->p.dni);
         }else{
             printf("\n---------------------------------------------------------------");
             printf("\nNo tiene hijo izquierdo.");
@@ -242,7 +242,7 @@ if( a == NULL){
 
         if(a->hijoDer!= NULL){
             printf("\n---------------------------------------------------------------");
-            printf("\nEl DNI de su hijo derecho es: %d",a->hijoDer->p.dni);
+            printf("\nEl DNI de su hijo derecho es: %ld",a->hijoDer->p.dni);
         }else{
             printf("\n---------------------------------------------------------------");
             printf("\nNo tiene hijo derecho.");

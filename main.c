@@ -333,41 +333,45 @@ int compararEstructuras(Prestador LSO[], int *cantLSO,Prestador LSOBT[], ArbolAB
         if(cantBajaLSOBT!=0) printf("Baja= %.2f", sumaBajaLSBT/cantBajaLSOBT);
         else printf("Baja= 0");
 
-
-
-
-
-
-
         gotoxy(0,9);
-         printf("// Arbol binario de busqueda");
+        printf("// Arbol binario de busqueda");
+
         gotoxy(0,10);
         printf("// Costos maximos ->");
+
         gotoxy(25,10);
         printf("Evocacion Exitosa= %0.2f", maxEvoABBE);
+
         gotoxy(55,10);
-         printf("Evocacion Fracaso= %0.2f", maxEvoABBF);
+        printf("Evocacion Fracaso= %0.2f", maxEvoABBF);
+
         gotoxy(85,10);
-          printf("Alta= %0.2f", maxAltaABB);
+        printf("Alta= %0.2f", maxAltaABB);
+
         gotoxy(100,10);
-          printf("Baja= %0.2f", maxBajaABB);
+        printf("Baja= %0.2f", maxBajaABB);
+
         gotoxy(0,11);
-         printf("// Costos Medios  ->");
+        printf("// Costos Medios  ->");
+
         gotoxy(25,11);
-         if(cantEvoEABB!=0) printf("Evocacion Exitosa= %.2f", sumaEvoABBE/cantEvoEABB);
+        if(cantEvoEABB!=0) printf("Evocacion Exitosa= %.2f", sumaEvoABBE/cantEvoEABB);
         else printf("Evocacion Exitosa= 0");
+
         gotoxy(55,11);
         if(cantEvoFABB!=0) printf("Evocacion Fracaso= %.2f", sumaEvoABBF/cantEvoFABB);
         else printf("Evocacion Fracaso= 0");
+
         gotoxy(85,11);
-if(cantAltaABB!=0) printf("Alta= %.2f", sumaAltaABB/cantAltaABB);
+        if(cantAltaABB!=0) printf("Alta= %.2f", sumaAltaABB/cantAltaABB);
         else printf("Alta= 0");
+
         gotoxy(100,11);
-if(cantBajaABB!=0) printf("Baja= %.2f", sumaBajaABB/cantBajaABB);
+        if(cantBajaABB!=0) printf("Baja= %.2f", sumaBajaABB/cantBajaABB);
         else printf("Baja= 0");
+
         gotoxy(0,13);
     }
-
     return 1;
 }
 

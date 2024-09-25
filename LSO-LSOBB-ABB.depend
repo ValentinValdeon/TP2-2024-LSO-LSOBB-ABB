@@ -3,7 +3,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1726362394 source:j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\main.c
+1726492572 source:j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\main.c
 	<stdio.h>
 	<stdlib.h>
 	<malloc.h>
@@ -19,10 +19,11 @@
 
 1726361898 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\lso.h
 
-1726362209 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\lsobb.h
+1727235835 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\lsobb.h
 	<math.h>
 
-1726362282 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\abb.h
+1727235835 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\abb.h
+	"Pila.h"
 
 1726444773 source:c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\main.c
 	<stdio.h>
@@ -44,4 +45,9 @@
 	<math.h>
 
 1726444261 c:\users\mateo\desktop\tp2-2024-lso-lsobb-abb\abb.h
+
+1727235878 j:\uni\eda\eda-4ta cursada\tp2\tp2-2024-lso-lsobb-abb\pila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 
