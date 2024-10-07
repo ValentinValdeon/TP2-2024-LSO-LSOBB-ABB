@@ -21,7 +21,6 @@ int localizarLSOBT(long dniX, Prestador P[], int *pos, int cant, int *celdasCons
 
     while(li<ls && P[m].dni != dniX)
     {
-        (*celdasConsul)++;
         if (dniX > P[m].dni)
         {
             li = m+1;
@@ -31,6 +30,7 @@ int localizarLSOBT(long dniX, Prestador P[], int *pos, int cant, int *celdasCons
             ls = m;
         }
         m = (li + ls )/2;
+        (*celdasConsul)+=2;
     }
 
     (*pos) = m;
@@ -90,14 +90,13 @@ int bajaLSOBT(Prestador p, Prestador P[],int *cant, int *cor)
         (*cant)--;
         return 1;
     }
-    else
-        return 0;
+    else return 0;
 }
 
 int evocacionLSOBT(int cant, Prestador P[], long dniX, Prestador *pAux, int *celdasConsul)
 {
     int pos = 0;
-
+    *celdasConsul=0;
     if(localizarLSOBT(dniX,P,&pos,cant,celdasConsul))
     {
         *pAux = P[pos];

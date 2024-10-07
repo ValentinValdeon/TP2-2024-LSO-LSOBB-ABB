@@ -2,11 +2,6 @@
 #define ABB_H_INCLUDED
 #include "Pila.h"
 
-typedef struct nodo{
-    Prestador p;
-    struct nodo *hijoDer;
-    struct nodo *hijoIzq;
-} Nodo;
 
 typedef struct ArbolABB{
 
@@ -32,15 +27,9 @@ void liberarABB(Nodo* nodo) {
 }
 
 int localizacionABB(ArbolABB* arbol, long dni_x, float *costosL){
-
-
-
     float costosAux = 0.0;
     (*arbol).cursor = arbol->raiz;
     (*arbol).padre = arbol->raiz;
-
-
-
 
     while((arbol->cursor != NULL) && (  arbol->cursor->p.dni != dni_x)) {
 
@@ -51,13 +40,9 @@ int localizacionABB(ArbolABB* arbol, long dni_x, float *costosL){
             (*arbol).padre = arbol->cursor;
             (*arbol).cursor = arbol->cursor->hijoDer;
         }
-        costosAux += 1;
+        costosAux += 2;
 
     }
-
-
-
-
 
     if(arbol->cursor != NULL){
         costosAux += 1 ;
@@ -71,12 +56,8 @@ int localizacionABB(ArbolABB* arbol, long dni_x, float *costosL){
 
 }
 
-int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
+int altaABB(ArbolABB *arbol,int *cant , Prestador p, float *costosA){
 
-
-    if(arbol->cant==110){ //arbol lleno
-        return 0;
-    }
     float costosAux = 0.0, costos = 0.0;
     Nodo *auxiliar = (Nodo*)malloc(sizeof(Nodo));
     if (auxiliar == NULL){
@@ -89,6 +70,12 @@ int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
             auxiliar->p = p;
             auxiliar->hijoDer = NULL;
             auxiliar->hijoIzq = NULL;
+
+
+   (*cant)++;
+            arbol->cant++;
+
+
             if(arbol->raiz == NULL){
 
                 arbol->raiz = auxiliar;
@@ -104,9 +91,10 @@ int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
             } else {
                 arbol->padre->hijoDer = auxiliar;
             }
+
             costosAux += 0.5;
             (*costosA)=costosAux;
-            (arbol->cant)++;
+
             return 1;
         } else{
             free((void*)auxiliar);
@@ -116,7 +104,7 @@ int altaABB(ArbolABB *arbol, Prestador p, float *costosA){
 
 }
 
-int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
+int bajaABB(ArbolABB* arbol,int *cant,Prestador p,  float *costosB){
 
 
     int resp = 0;
@@ -124,11 +112,14 @@ int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
     if(localizacionABB(arbol, p.dni, &costos) == 1){
             if(compararPrestador(p,arbol->cursor->p))
             {
+
                 resp=1;
             }else{
                 resp=0;
             }
-            (arbol->cant)--;
+
+              (*cant)--;
+            arbol->cant--;
         }
         if (resp == 1){//CASO 1: NODO SIN HIJOS
         if ((arbol->cursor->hijoIzq == NULL) && (arbol->cursor->hijoDer == NULL)){
@@ -200,13 +191,15 @@ int bajaABB(ArbolABB* arbol,Prestador p,  float *costosB){
             aux = NULL;
         }
             (*costosB) = costosAux;
+
+
             return 1; //lo encontro
         }else{
             return 0;
         }  //no lo encontro
     }
 
-int evocacionABB(int cant,ArbolABB* arbol,long dni_x, Prestador *p, float* costos){
+int evocacionABB(ArbolABB* arbol,long dni_x, Prestador *p, float* costos){
     float costosAux=0.0;
     if(localizacionABB(arbol, dni_x, &costosAux) == 1){
         p->dni = arbol->cursor->p.dni;
@@ -224,37 +217,63 @@ int evocacionABB(int cant,ArbolABB* arbol,long dni_x, Prestador *p, float* costo
 }
 
 
-void preOrden(Nodo *a){
 
-if( a == NULL){
 
-    }else{
+void imprimirNodo(Nodo* a) {
+    if (a == NULL) {
+        return;
+    }
 
-        MostrarPrestador(a->p);
+    MostrarPrestador(a->p);
 
-        if( a->hijoIzq != NULL ){
-            printf("\n---------------------------------------------------------------");
-            printf("\nEl DNI de su hijo izquierdo es: %ld",a->hijoIzq->p.dni);
-        }else{
-            printf("\n---------------------------------------------------------------");
-            printf("\nNo tiene hijo izquierdo.");
-        }
-
-        if(a->hijoDer!= NULL){
-            printf("\n---------------------------------------------------------------");
-            printf("\nEl DNI de su hijo derecho es: %ld",a->hijoDer->p.dni);
-        }else{
-            printf("\n---------------------------------------------------------------");
-            printf("\nNo tiene hijo derecho.");
-        }
+    if (a->hijoIzq != NULL) {
         printf("\n---------------------------------------------------------------");
-        getchar();
-        preOrden(a->hijoIzq);
-        preOrden(a->hijoDer);
+        printf("\nEl DNI de su hijo izquierdo es: %ld", a->hijoIzq->p.dni);
+    } else {
+        printf("\n---------------------------------------------------------------");
+        printf("\nNo tiene hijo izquierdo.");
+    }
+
+    if (a->hijoDer != NULL) {
+        printf("\n---------------------------------------------------------------");
+        printf("\nEl DNI de su hijo derecho es: %ld", a->hijoDer->p.dni);
+    } else {
+        printf("\n---------------------------------------------------------------");
+        printf("\nNo tiene hijo derecho.");
+    }
+
+    printf("\n---------------------------------------------------------------");
+    getchar();
+}
 
 
+void preOrdenIterativo(Nodo* raiz) {
+    if (raiz == NULL) {
+        return;
+    }
+
+    Pila* pila = NULL;
+    apilar(&pila, raiz);
+
+    while (pila != NULL) {
+        Nodo* actual = desapilar(&pila);
+
+
+        imprimirNodo(actual);
+
+        //  hijo derecho para que se procese después del izquierdo
+        if (actual->hijoDer != NULL) {
+            apilar(&pila, actual->hijoDer);
+        }
+
+        //  hijo izquierdo
+        if (actual->hijoIzq != NULL) {
+            apilar(&pila, actual->hijoIzq);
+        }
     }
 }
+
+
 
 
 #endif // ABB_H_INCLUDED

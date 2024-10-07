@@ -26,11 +26,12 @@ int localizarLSO(long dniX, Prestador P[], int *pos, int cant,int *celdasConsul)
         (*celdasConsul)++;
         (*pos) ++;
     }
+    (*celdasConsul)++; //Esta celda es sumada ya que en el while no se contempla sumar la ultima celda consultada
 
-    if(cant!=0 && (*pos) < cant) (*celdasConsul)++; //Este celda es sumada ya que en el while no se contempla sumar la ultima celda consultada
-
-    if((*pos)<cant && dniX == P[(*pos)].dni) return 1;
-    else return 0;
+    if(dniX == P[(*pos)].dni){
+        (*celdasConsul)++;
+        return 1;
+    }else return 0;
 }
 
 int altaLSO(Prestador p, Prestador P[], int *cant, int *cor)
@@ -51,7 +52,7 @@ int altaLSO(Prestador p, Prestador P[], int *cant, int *cor)
         }
         else
         {
-            for(i=(*cant+1); i>=pos; i--)
+            for(i=(*cant+1); i>pos; i--)
             {
                 P[i]=P[i-1];
                 (*cor)++;
@@ -94,7 +95,7 @@ int bajaLSO(Prestador p, Prestador P[],int *cant, int *cor)
 int evocacionLSO(int cant, Prestador P[], long dniX, Prestador *p, int *celdasConsul)
 {
     int pos = cant-1;
-
+    *celdasConsul=0;
     if(dniX >= MasInfinito || cant == 0)//lista vacia o dni fuera del lim
     {
         return 2;
